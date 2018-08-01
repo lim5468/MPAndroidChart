@@ -353,16 +353,16 @@ public abstract class Utils {
      * @return
      */
     public static float roundToNextSignificant(double number) {
-        if (Double.isInfinite(number) || 
-            Double.isNaN(number) || 
-            number == 0.0)
+        if (Double.isInfinite(number) ||
+                Double.isNaN(number) ||
+                number == 0.0)
             return 0;
-        
-        final float d = (float) Math.ceil((float) Math.log10(number < 0 ? -number : number));
+
+        final double d = Math.ceil(Math.log10(number < 0 ? -number : number));
         final int pw = 1 - (int) d;
-        final float magnitude = (float) Math.pow(10, pw);
+        final double magnitude = Math.pow(10, pw);
         final long shifted = Math.round(number * magnitude);
-        return shifted / magnitude;
+        return (float) (shifted / magnitude);
     }
 
     /**
